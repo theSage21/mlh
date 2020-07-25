@@ -30,10 +30,6 @@ with requests.Session() as s:
             batch = batch[0].reshape(1, 1, 28, 28)
         else:
             batch = np.vstack(batch).reshape(len(batch), 1, 28, 28)
-        print(batch.shape)  # B, 1, 28, 28
-        print(batch.shape)  # B, 1, 28, 28
-        print(batch.shape)  # B, 1, 28, 28
-        print(batch.shape)  # B, 1, 28, 28
         y = net.forward(torch.Tensor(batch)).detach().numpy()
         s.post(f"{url}/work", json={"jobids": jids})
         batch, jids = [], []

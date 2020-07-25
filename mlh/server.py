@@ -10,7 +10,10 @@ app = flask.Flask(__name__)
 def get_prediction():
     jsn = flask.request.json["data"]
     # redis queue push and watch pattern
-    r = requests.post("http://localhost:8080/submit", json=jsn, timeout=2)
+    if is_testing_user(current_user):
+        r = requests.post("http://localhost:8080/v1.2/submit", json=jsn, timeout=2)
+    else:
+        r = requests.post("http://localhost:8080/v1.1/submit", json=jsn, timeout=2)
     return str(r.json())
 
 
