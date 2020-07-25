@@ -10,6 +10,7 @@ aiohttp = {extras = ["speedups"], version = "^3.6.2"}
 requests = "^2.24.0"
 ujson = "^3.0.0"
 tqdm = "^4.48.0"
+flask = "^1.1.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
