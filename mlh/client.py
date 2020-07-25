@@ -6,5 +6,11 @@ url = "http://localhost:8080"
 d = {"a": 1, "b": 2}
 
 with requests.Session() as s:
-    for _ in tqdm(repeat([None])):
-        r = s.post(f"{url}/submit", json=d)
+    with tqdm() as pbar:
+        for _ in repeat([None]):
+            try:
+                r = s.post(f"{url}/submit", json=d, timeout=2)
+            except:
+                pass
+            else:
+                pbar.update(1)

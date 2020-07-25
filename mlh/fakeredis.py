@@ -25,7 +25,8 @@ async def get_work(request):
 
 async def work_done(request):
     data = await request.json()
-    await responses[data["jobid"]].put(json.dumps(data))
+    for jid in data["jobids"]:
+        await responses[jid].put(json.dumps(data))
     return web.Response(text="ok")
 
 
@@ -37,3 +38,6 @@ app.add_routes(
         web.post("/work", work_done),
     ]
 )
+
+if __name__ == "__main__":
+    web.run_app(app)
